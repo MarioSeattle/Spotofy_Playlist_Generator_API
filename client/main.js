@@ -2,14 +2,15 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 //Create event search
-
 Template.search.events({
-    'keyup #searchArtist':function(){
-
+    'keyup #searchArtists':function(){
         let searchText = event.target.value;
-
-        console.log(searchText);
-
+        Meteor.call('searchArtists', searchText, (err, artists) => {
+            if(err){
+                console.log(err);
+            } else {
+                console.log(artists);
+            }
+        });
     }
-
 });
